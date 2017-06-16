@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nginx-configs
+          mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: nginx-configs
+          configMap:
+            name: nginx-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  default.conf: |
+    server {
+      listen 80;
+      listen [::]:80;
+      server_name  _;
+
+      location / {
+        proxy_pass http://web:80;
+      }
+      location /api/ {
+        proxy_pass http://api:3000/;
+      }
+    }

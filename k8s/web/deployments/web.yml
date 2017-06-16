@@ -2,12 +2,14 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: web
+  labels:
+    app: web
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        name: web
+        app: web
     spec:
       containers:
         - name: todo-web
@@ -21,4 +23,16 @@ spec:
                 name: application-settings
                 key: APPLICATION_URL
           - name: API_HOST
-            value: todo.tosih.org:3000
+            valueFrom:
+              configMapKeyRef:
+                name: application-settings
+                key: API_HOST
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: application-settings
+  namespace: default
+data:
+  APPLICATION_URL: todo.tosih.org
+  API_HOST: todo.tosih.org/api

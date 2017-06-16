@@ -1,13 +1,15 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:  
-  name: api
+  name: api      
+  labels:
+    app: api
 spec:
   replicas: 3
   template:
     metadata:
       labels:
-        name: api
+        app: api
     spec:
       containers:
         - name: todo-api

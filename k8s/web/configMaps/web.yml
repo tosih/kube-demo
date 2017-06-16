@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: application-settings
-  namespace: default
-data:
-  APPLICATION_URL: todo.tosih.org

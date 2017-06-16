@@ -7,3 +7,8 @@
 ```$ kops update cluster k8s.tosih.org --yes```
 * Validate Cluster
 ```$ kops validate cluster```
+
+## Deploy application
+```$ kubectl apply -f -R k8s
+
+## Try app out!
