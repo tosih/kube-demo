@@ -9,6 +9,6 @@
 ```$ kops validate cluster```
 
 ## Deploy application
-```$ kubectl apply -f -R k8s
+```$ kubectl apply -f -R k8s```
 
 ## Try app out!

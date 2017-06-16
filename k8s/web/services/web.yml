@@ -9,3 +9,28 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: web
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+  - hosts:
+    - todo.tosih.org
+    secretName: web-tls
+  rules:
+  - host: todo.tosih.org
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: web
+          servicePort: 80
+      - path: /todos
+        backend:
+          serviceName: api
+          servicePort: 3000

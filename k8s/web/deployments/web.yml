@@ -14,6 +14,7 @@ spec:
       containers:
         - name: todo-web
           image: sohail/todo-web:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           env:
@@ -35,4 +36,5 @@ metadata:
   namespace: default
 data:
   APPLICATION_URL: todo.tosih.org
-  API_HOST: todo.tosih.org/api
+  API_HOST: todo.tosih.org/todos
+  EMAIL: sotothehail@gmail.com
