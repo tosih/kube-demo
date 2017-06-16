@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: web
+    spec:
+      containers:
+        - name: todo-web
+          image: sohail/todo-web:latest
+          ports:
+            - containerPort: 80
+          env:
+          - name: APPLICATION_URL
+            valueFrom:
+              configMapKeyRef:
+                name: application-settings
+                key: APPLICATION_URL
+          - name: API_HOST
+            value: todo.tosih.org:3000

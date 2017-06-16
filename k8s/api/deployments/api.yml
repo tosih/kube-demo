@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:  
+  name: api
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        name: api
+    spec:
+      containers:
+        - name: todo-api
+          image: sohail/todo-api:latest
+          ports:
+            - containerPort: 3000
+          env:
+          - name: MONGODB_HOST 
+            value: mongodb-host

@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-ingress
+spec:
+  selector:
+    app: web
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: web
+  name: web
+spec:
+  ports:
+  - nodePort: 32164
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    name: web
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - hostname: a60e4e46f522b11e7873d02795b8a7ec-562656245.us-west-1.elb.amazonaws.com
