@@ -35,6 +35,6 @@ metadata:
   name: application-settings
   namespace: default
 data:
-  APPLICATION_URL: todo.local
-  API_HOST: todo.local/todos
+  APPLICATION_URL: todoapp.local
+  API_HOST: todoapp.local/todos
   EMAIL: sotothehail@gmail.com
