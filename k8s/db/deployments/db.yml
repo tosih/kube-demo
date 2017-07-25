@@ -18,9 +18,7 @@ spec:
           name: driver
         volumeMounts:
         - mountPath: /data/db
-          name: mongo-ebs-storage
+          name: mongo-fs-storage
       volumes:
-      - name: mongo-ebs-storage
-        awsElasticBlockStore:
-          volumeID: vol-013d0dddda313f77e
-          fsType: ext4
+      - name: mongo-fs-storage
+        emptyDir: {}
