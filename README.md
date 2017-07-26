@@ -23,4 +23,4 @@
 ## Deploy application  
     $ kubectl apply -f -R k8s
 
-(Try app out!)[https://todoapp.local]
+[Try app out!](https://todoapp.local)
