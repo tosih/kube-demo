@@ -21,6 +21,6 @@
     $ echo "$(minikube ip) todoapp.local" | sudo tee --append /etc/hosts
 
 ## Deploy application  
-    $ kubectl apply -f -R k8s
+    $ kubectl apply -R -f k8s/
 
 [Try app out!](https://todoapp.local)
