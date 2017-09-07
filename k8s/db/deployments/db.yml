@@ -1,9 +1,10 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
+  name: mongo
+  namespace: todo
   labels:
     db: mongo
-  name: mongo
 spec:
   template:
     metadata:

@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: web
+  namespace: todo
   labels:
     app: web
 spec:
@@ -33,7 +34,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: application-settings
-  namespace: default
+  namespace: todo
 data:
   APPLICATION_URL: todoapp.local
   API_HOST: todoapp.local/todos
