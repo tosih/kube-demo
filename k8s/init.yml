@@ -12,3 +12,21 @@ data:
   APPLICATION_URL: todoapp.local
   API_HOST: todoapp.local/todos
   EMAIL: sotothehail@gmail.com
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nginx-ingress
+---
+apiVersion: v1
+data:
+  proxy-connect-timeout: "15"
+  proxy-read-timeout: "600"
+  proxy-send-timeout: "600"
+  hsts-include-subdomains: "false"
+  body-size: "64m"
+  server-name-hash-bucket-size: "256"
+kind: ConfigMap
+metadata:
+  namespace: nginx-ingress
+  name: nginx
