@@ -1,25 +1,41 @@
 apiVersion: extensions/v1beta1
-kind: Deployment
+kind: ReplicaSet
 metadata:
-  name: mongo
+  name: mongo-v000
   namespace: todo
   labels:
     db: mongo
 spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      db: mongo
   template:
     metadata:
       labels:
         db: mongo
     spec:
       containers:
-      - image: mongo
-        name: mongo
+      - name: mongo
+        image: mongo
         ports:
         - containerPort: 27017
-          name: driver
         volumeMounts:
         - mountPath: /data/db
           name: mongo-fs-storage
       volumes:
       - name: mongo-fs-storage
         emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-host
+  namespace: todo
+spec:
+  selector:
+    db: mongo
+  ports:
+  - protocol: TCP
+    port: 27017
+    targetPort: 27017

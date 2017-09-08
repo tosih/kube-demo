@@ -1,12 +1,15 @@
 apiVersion: extensions/v1beta1
-kind: Deployment
+kind: ReplicaSet
 metadata:
-  name: api
+  name: api-v000
   namespace: todo
   labels:
     app: api
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      app: api
   template:
     metadata:
       labels:
@@ -21,3 +24,16 @@ spec:
           env:
           - name: MONGODB_HOST
             value: mongodb-host
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api
+  namespace: todo
+spec:
+  selector:
+    app: api
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000

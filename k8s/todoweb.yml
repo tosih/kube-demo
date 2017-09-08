@@ -1,12 +1,15 @@
 apiVersion: extensions/v1beta1
-kind: Deployment
+kind: ReplicaSet
 metadata:
-  name: web
+  name: web-v000
   namespace: todo
   labels:
     app: web
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: web
   template:
     metadata:
       labels:
@@ -31,11 +34,14 @@ spec:
                 key: API_HOST
 ---
 apiVersion: v1
-kind: ConfigMap
+kind: Service
 metadata:
-  name: application-settings
+  name: web
   namespace: todo
-data:
-  APPLICATION_URL: todoapp.local
-  API_HOST: todoapp.local/todos
-  EMAIL: sotothehail@gmail.com
+spec:
+  selector:
+    app: web
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
