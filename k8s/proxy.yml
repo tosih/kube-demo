@@ -11,7 +11,7 @@ spec:
         app: nginx
     spec:
       containers:
-      - image: gcr.io/google_containers/nginx-ingress-controller:0.8.3
+      - image: gcr.io/google_containers/nginx-ingress-controller:0.9.0-beta.12
         name: nginx
         imagePullPolicy: Always
         env:
@@ -36,7 +36,7 @@ spec:
         args:
         - /nginx-ingress-controller
         - --default-backend-service=nginx-ingress/default-http-backend
-        - --nginx-configmap=nginx-ingress/nginx
+        - --configmap=nginx-ingress/nginx
 ---
 apiVersion: v1
 kind: Service
@@ -44,18 +44,11 @@ metadata:
   name: nginx
   namespace: nginx-ingress
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: nginx
-  type: NodePort
   ports:
   - port: 80
-    targetPort: 80
-    nodePort: 32080
-    protocol: TCP
     name: http
   - port: 443
-    targetPort: 443
-    nodePort: 32443
-    protocol: TCP
     name: https
