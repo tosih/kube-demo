@@ -15,7 +15,7 @@
 
 #### Generate TLS  
     $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /tmp/tls.key -out /tmp/tls.crt -subj "/CN=todoapp.local"
-    $ kubectl create secret tls ingress-secret --key /tmp/tls.key --cert /tmp/tls.crt
+    $ kubectl create secret tls ingress-tls-secret --key /tmp/tls.key --cert /tmp/tls.crt --namespace=todo
 
 #### Add domain to hosts file  
     $ echo "$(minikube ip) todoapp.local" | sudo tee --append /etc/hosts

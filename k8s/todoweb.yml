@@ -58,7 +58,7 @@ spec:
   tls:
   - hosts:
     - todoapp.local
-    secretName: web-tls
+    secretName: ingress-tls-secret
   rules:
   - host: todoapp.local
     http:
